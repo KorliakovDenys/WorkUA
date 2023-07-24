@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using WorkUA.Data;
 using WorkUA.Models;
 
-namespace WorkUA.Pages.Applicants {
+namespace WorkUA.Pages.Cities {
     public class DeleteModel : PageModel {
         private readonly DataContext _context;
 
@@ -13,37 +13,36 @@ namespace WorkUA.Pages.Applicants {
         }
 
         [BindProperty]
-        public Applicant Applicant { get; set; } = default!;
+        public City City { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id) {
-            if (id == null || _context.Applicant == null) {
+            if (id == null || _context.City == null) {
                 return NotFound();
             }
 
-            var applicant = await _context.Applicant.FirstOrDefaultAsync(m => m.Id == id);
+            var city = await _context.City.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (applicant == null) {
+            if (city == null) {
                 return NotFound();
             }
 
-            Applicant = applicant;
+            City = city;
 
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id) {
-            if (id == null || _context.Applicant == null) {
+            if (id == null || _context.City == null) {
                 return NotFound();
             }
 
-            var applicant = await _context.Applicant.Include(a => a.City).Include(a => a.Profession)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var city = await _context.City.FindAsync(id);
 
-            if (applicant == null) return RedirectToPage("./Index");
-
-            Applicant = applicant;
-            _context.Applicant.Remove(Applicant);
-            await _context.SaveChangesAsync();
+            if (city != null) {
+                City = city;
+                _context.City.Remove(City);
+                await _context.SaveChangesAsync();
+            }
 
             return RedirectToPage("./Index");
         }

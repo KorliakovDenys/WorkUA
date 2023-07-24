@@ -41,5 +41,11 @@ namespace WorkUA.Data {
         public DbSet<Applicant>? Applicant { get; set; }
 
         public DbSet<Vacancy>? Vacancy { get; set; }
+
+        public DbSet<Profession>? Profession { get; set; }
+
+        public DbSet<Employer>? Employer { get; set; }
+
+        public DbSet<City>? City { get; set; }
     }
 }

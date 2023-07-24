@@ -19,10 +19,16 @@ namespace WorkUA.Pages.Vacancies {
                 return NotFound();
             }
 
-            var vacancy = await _context.Vacancy.Include(v => v.Employer).Include(v => v.Profession).Include(v => v.Employer!.City)
+            var vacancy = await _context.Vacancy.Include(v => v.Employer).Include(v => v.Profession)
+                .Include(v => v.Employer!.City).Include(v => v.Employer!.Vacancies)
                 .FirstOrDefaultAsync(m => m.Id == id);
+            
             if (vacancy == null) {
                 return NotFound();
+            }
+            
+            foreach (var item in vacancy.Employer!.Vacancies) {
+                await _context.Entry(item).Reference(p => p.Profession).LoadAsync();
             }
 
             Vacancy = vacancy;

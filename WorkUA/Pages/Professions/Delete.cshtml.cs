@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using WorkUA.Data;
 using WorkUA.Models;
 
-namespace WorkUA.Pages.Applicants {
+namespace WorkUA.Pages.Professions {
     public class DeleteModel : PageModel {
         private readonly DataContext _context;
 
@@ -13,37 +13,36 @@ namespace WorkUA.Pages.Applicants {
         }
 
         [BindProperty]
-        public Applicant Applicant { get; set; } = default!;
+        public Profession Profession { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id) {
-            if (id == null || _context.Applicant == null) {
+            if (id == null || _context.Profession == null) {
                 return NotFound();
             }
 
-            var applicant = await _context.Applicant.FirstOrDefaultAsync(m => m.Id == id);
+            var profession = await _context.Profession.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (applicant == null) {
+            if (profession == null) {
                 return NotFound();
             }
 
-            Applicant = applicant;
+            Profession = profession;
 
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id) {
-            if (id == null || _context.Applicant == null) {
+            if (id == null || _context.Profession == null) {
                 return NotFound();
             }
 
-            var applicant = await _context.Applicant.Include(a => a.City).Include(a => a.Profession)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var profession = await _context.Profession.FindAsync(id);
 
-            if (applicant == null) return RedirectToPage("./Index");
-
-            Applicant = applicant;
-            _context.Applicant.Remove(Applicant);
-            await _context.SaveChangesAsync();
+            if (profession != null) {
+                Profession = profession;
+                _context.Profession.Remove(Profession);
+                await _context.SaveChangesAsync();
+            }
 
             return RedirectToPage("./Index");
         }

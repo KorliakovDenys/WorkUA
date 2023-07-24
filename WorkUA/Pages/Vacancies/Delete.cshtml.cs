@@ -36,7 +36,8 @@ namespace WorkUA.Pages.Vacancies {
                 return NotFound();
             }
 
-            var vacancy = await _context.Vacancy.Include(v => v.Employer).Include(v => v.Profession).Include(v => v.Employer!.City)
+            var vacancy = await _context.Vacancy.Include(v => v.Employer).Include(v => v.Profession)
+                .Include(v => v.Employer!.City)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (vacancy == null) return RedirectToPage("./Index");

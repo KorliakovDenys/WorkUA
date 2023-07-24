@@ -23,6 +23,9 @@
 
     <ItemGroup>
       <Folder Include="Pages\Applicants\" />
+      <Folder Include="Pages\Cities\" />
+      <Folder Include="Pages\Employers\" />
+      <Folder Include="Pages\Professions\" />
       <Folder Include="Pages\Vacancies\" />
     </ItemGroup>
 
