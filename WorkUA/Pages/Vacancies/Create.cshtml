@@ -1,0 +1,39 @@
+@page
+@model WorkUA.Pages.Vacancies.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Vacancy</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Vacancy.IsRemote" /> @Html.DisplayNameFor(model => model.Vacancy.IsRemote)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vacancy.Profession" class="control-label"></label>
+                <select asp-for="Vacancy.ProfessionId" class ="form-control" asp-items="ViewBag.ProfessionId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vacancy.Employer" class="control-label"></label>
+                <select asp-for="Vacancy.EmployerId" class ="form-control" asp-items="ViewBag.EmployerId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+

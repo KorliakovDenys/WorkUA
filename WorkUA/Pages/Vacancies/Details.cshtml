@@ -1,0 +1,43 @@
+@page
+@model WorkUA.Pages.Vacancies.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Vacancy</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vacancy.IsRemote)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vacancy.IsRemote)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vacancy.Profession)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vacancy.Profession!.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vacancy.Employer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vacancy.Employer!.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vacancy.Employer!.City)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vacancy.Employer!.City!.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Vacancy?.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
