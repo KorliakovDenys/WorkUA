@@ -10,6 +10,40 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <div class="form-group">
+            <label for="city-select"></label>
+            <select id="city-select" asp-for="CityIdFilter" asp-items="ViewBag.Cities">
+                <option value="">-- Select city --</option>
+            </select>
+            <span asp-validation-for="CityIdFilter" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="profession-select"></label>
+            <select id="profession-select" asp-for="ProfessionIdFilter" asp-items="ViewBag.Professions">
+                <option value="">-- Select profession --</option>
+            </select>
+            <span asp-validation-for="ProfessionIdFilter" class="text-danger"></span>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="IsRemoteFilter"/> 
+                Remote work.
+            </label>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="IsNotRemoteFilter"/> 
+                Office work.
+            </label>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Apply" class="btn btn-primary">
+        </div>
+        
+    </div>
+</form>
 <table class="table">
     <thead>
     <tr>
